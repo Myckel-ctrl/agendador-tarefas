@@ -170,18 +170,18 @@ http://localhost:8081
 ## 🧪 Testando a API
 
 1. Inicie o microsserviço **usuario**.
-2. Inicie o microsserviço **agendador-tarefas**.
-3. Acesse:
+3. Inicie o microsserviço **agendador-tarefas**.
+4. Acesse:
 
 ```
 http://localhost:8081/swagger-ui.html
 ```
 
 4. Clique em **Authorize** no canto superior direito.
-5. Informe o token JWT no formato:
+5. Informe o token JWT gerado no microsserviço de **usuario** no formato:
 
 ```
-Bearer seu_token_aqui
+eyJhbGciOiJIUzI1Ni... 
 ```
 
 O Swagger já está configurado com autenticação JWT e documentação OpenAPI, permitindo testar toda a API diretamente pela interface web.
