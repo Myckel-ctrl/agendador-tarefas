@@ -44,6 +44,7 @@ public class TarefaController {
     }
 
     @GetMapping
+    @Operation(summary = "Lista as tarefas do usuário autenticado")
     public ResponseEntity<List<TarefaResponseDTO>> listarMinhasTarefas(
             @AuthenticationPrincipal AuthenticatedUser usuarioLogado) {
         return ResponseEntity.ok(tarefaService.listarMinhasTarefas(usuarioLogado));
