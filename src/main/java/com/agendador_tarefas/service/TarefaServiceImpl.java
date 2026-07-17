@@ -95,8 +95,6 @@ public class TarefaServiceImpl implements TarefaService {
         tarefaRepository.delete(tarefa);
     }
 
-    // ── HELPERS ──────────────────────────────────────────────────────────────
-
     private Tarefa buscarTarefaOuFalhar(String id) {
         if (!ObjectId.isValid(id)) {
             throw new ResourceNotFoundException("Tarefa", id);

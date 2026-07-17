@@ -37,9 +37,8 @@ public class TarefaController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Busca uma tarefa pelo ID (apenas se pertencer ao usuário autenticado)")
-    public ResponseEntity<TarefaResponseDTO> buscarPorId(
-            @AuthenticationPrincipal AuthenticatedUser usuarioLogado,
-            @PathVariable String id) {
+    public ResponseEntity<TarefaResponseDTO> buscarPorId(@AuthenticationPrincipal AuthenticatedUser usuarioLogado,
+                                                         @PathVariable String id) {
         return ResponseEntity.ok(tarefaService.buscarPorId(usuarioLogado, id));
     }
 
@@ -51,7 +50,7 @@ public class TarefaController {
     }
 
     @GetMapping("/periodo")
-    @Operation(summary = "Busca as tarefas do usuário autenticado dentro de um período (dataVencimento)")
+    @Operation(summary = "Busca as tarefas do usuário autenticado dentro de um período (inicio) e (fim)")
     public ResponseEntity<List<TarefaResponseDTO>> buscarPorPeriodo(
             @AuthenticationPrincipal AuthenticatedUser usuarioLogado,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime inicio,
@@ -61,27 +60,24 @@ public class TarefaController {
 
     @PatchMapping("/{id}")
     @Operation(summary = "Atualiza parcialmente uma tarefa (campos não enviados permanecem inalterados)")
-    public ResponseEntity<TarefaResponseDTO> atualizar(
-            @AuthenticationPrincipal AuthenticatedUser usuarioLogado,
-            @PathVariable String id,
-            @Valid @RequestBody TarefaUpdateDTO dto) {
+    public ResponseEntity<TarefaResponseDTO> atualizar(@AuthenticationPrincipal AuthenticatedUser usuarioLogado,
+                                                       @PathVariable String id,
+                                                       @Valid @RequestBody TarefaUpdateDTO dto) {
         return ResponseEntity.ok(tarefaService.atualizar(usuarioLogado, id, dto));
     }
 
     @PatchMapping("/{id}/status")
     @Operation(summary = "Altera apenas o status de uma tarefa")
-    public ResponseEntity<TarefaResponseDTO> atualizarStatus(
-            @AuthenticationPrincipal AuthenticatedUser usuarioLogado,
-            @PathVariable String id,
-            @Valid @RequestBody StatusUpdateDTO dto) {
+    public ResponseEntity<TarefaResponseDTO> atualizarStatus(@AuthenticationPrincipal AuthenticatedUser usuarioLogado,
+                                                             @PathVariable String id,
+                                                             @Valid @RequestBody StatusUpdateDTO dto) {
         return ResponseEntity.ok(tarefaService.atualizarStatus(usuarioLogado, id, dto));
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Remove uma tarefa do usuário autenticado")
-    public ResponseEntity<Void> deletar(
-            @AuthenticationPrincipal AuthenticatedUser usuarioLogado,
-            @PathVariable String id) {
+    public ResponseEntity<Void> deletar(@AuthenticationPrincipal AuthenticatedUser usuarioLogado,
+                                        @PathVariable String id) {
         tarefaService.deletar(usuarioLogado, id);
         return ResponseEntity.noContent().build();
     }
